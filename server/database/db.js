@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
+dotenv.config();
 
-const DB_URL = 'mongodb+srv://rishav:rishav@cluster0.4x2r742.mongodb.net/?retryWrites=true&w=majority'
+const DB_URL = process.env.DB_URL;
 const DBConnection =async () =>{
     try {
        await mongoose.connect(DB_URL)

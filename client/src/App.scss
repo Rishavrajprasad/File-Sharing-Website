@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Lato:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+.container {
+    background-image: url(/bg.jpg);
+    height: 100vh;
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+
+.box {
+    height: 70vh;
+    width: 80vh;
+    background-color: #e8e8e8;
+
+    display: flex; 
+    justify-content: center; 
+    border-radius: 10px;
+    box-shadow: 20px 20px 16px 5px rgba(0, 0, 0, 0.5);
+
+    .content{
+        text-align: center;
+        h1{
+            font-family: Montserrat;
+            font-size: 50px;
+            letter-spacing: 5px;
+            margin-bottom: 2px;
+            margin-top: 30px;
+        }
+        p{
+            margin-top: 0px;
+            font-family: Montserrat;
+            font-size: 20px;
+            letter-spacing: 4px;
+            text-align: center;
+            font-weight: 500;
+        }
+        .upload {
+            font-family: Montserrat;
+            margin-top: 25px;
+            width: 15em;
+            height: 3em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 30em;
+            font-size: 16px;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 6px 6px 12px #c5c5c5,
+                        -6px -6px 12px #ffffff;
+           }
+           
+           .upload::before {
+            content: '';
+            width: 0;
+            height: 3em;
+            border-radius: 30em;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+            transition: .5s ease;
+            display: block;
+            z-index: -1;
+           }
+           
+           .upload:hover::before {
+            width: 15em;
+           }
+        .scanner{
+            margin-top: 20px;
+            img{
+                height: 150px;
+                width: 150px;
+                border-radius: 8px;
+            }
+        }
+        .download {
+            position: relative;
+            margin-top: 10px;
+            padding: 12px 18px;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+            cursor: pointer;
+          }
+          
+          .download:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            border-radius: 50px;
+            background: #b1dae7;
+            width: 45px;
+            height: 45px;
+            transition: all 0.3s ease;
+          }
+          
+          .download span {
+            position: relative;
+            font-family: "Ubuntu", sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #234567;
+          }
+          
+          .download svg {
+            position: relative;
+            top: 0;
+            margin-left: 10px;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke: #234567;
+            stroke-width: 2;
+            transform: translateX(-5px);
+            transition: all 0.3s ease;
+          }
+          
+          .download:hover:before {
+            width: 100%;
+            background: #b1dae7;
+          }
+          
+          .download:hover svg {
+            transform: translateX(0);
+          }
+          
+          .download:active {
+            transform: scale(0.95);
+          }
+          
+    }
+}
+}

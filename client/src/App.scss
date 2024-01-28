@@ -77,62 +77,66 @@
             }
         }
         .download {
-            position: relative;
-            margin-top: 10px;
-            padding: 12px 18px;
-            transition: all 0.2s ease;
-            border: none;
-            background: none;
-            cursor: pointer;
-          }
-          
-          .download:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: block;
-            border-radius: 50px;
-            background: #b1dae7;
-            width: 45px;
-            height: 45px;
-            transition: all 0.3s ease;
-          }
-          
-          .download span {
-            position: relative;
-            font-family: "Ubuntu", sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            color: #234567;
-          }
-          
-          .download svg {
-            position: relative;
-            top: 0;
-            margin-left: 10px;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            stroke: #234567;
-            stroke-width: 2;
-            transform: translateX(-5px);
-            transition: all 0.3s ease;
-          }
-          
-          .download:hover:before {
-            width: 100%;
-            background: #b1dae7;
-          }
-          
-          .download:hover svg {
-            transform: translateX(0);
-          }
-          
-          .download:active {
-            transform: scale(0.95);
-          }
+          margin-left: 90px;
+          margin-top: 10px;
+          --primary-color: #645bff;
+          --secondary-color: #fff;
+          --hover-color: #111;
+          --arrow-width: 10px;
+          --arrow-stroke: 2px;
+          box-sizing: border-box;
+          border: 0;
+          border-radius: 20px;
+          color: var(--secondary-color);
+          padding: 1em 1.8em;
+          background: var(--primary-color);
+          display: flex;
+          transition: 0.2s background;
+          align-items: center;
+          gap: 0.6em;
+          font-weight: bold;
+        }
+        
+        .download .arrow-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        
+        .download .arrow {
+          margin-top: 1px;
+          width: var(--arrow-width);
+          background: var(--primary-color);
+          height: var(--arrow-stroke);
+          position: relative;
+          transition: 0.2s;
+        }
+        
+        .download .arrow::before {
+          content: "";
+          box-sizing: border-box;
+          position: absolute;
+          border: solid var(--secondary-color);
+          border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
+          display: inline-block;
+          top: -3px;
+          right: 3px;
+          transition: 0.2s;
+          padding: 3px;
+          transform: rotate(-45deg);
+        }
+        
+        .download:hover {
+          background-color: var(--hover-color);
+        }
+        
+        .download:hover .arrow {
+          background: var(--secondary-color);
+        }
+        
+        .download:hover .arrow:before {
+          right: 0;
+        }      
           
     }
 }

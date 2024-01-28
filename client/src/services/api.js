@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URI = 'https://fileflow-7qyv.onrender.com';
+const API_URI = 'https://fileflow-7qyv.onrender.com/';
 
 export const uploadFile = async (data) => {
     try {

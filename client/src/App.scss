@@ -137,7 +137,22 @@
         .download:hover .arrow:before {
           right: 0;
         }      
-          
+        .progress-container {
+          width: 100%;
+          background-color: #ddd;
+          border-radius: 4px;
+          overflow: hidden;
+          height: 20px;
+          margin-bottom: 10px;
+  
+          .progress-bar {
+            background-color: #4caf50;
+            height: 100%;
+            line-height: 20px;
+            text-align: center;
+            color: white;
+          }
+        } 
     }
 }
 }

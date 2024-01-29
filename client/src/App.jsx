@@ -1,3 +1,5 @@
+// App.jsx
+
 import { useRef, useState, useEffect } from 'react';
 import QRCode from 'qrcode';
 import React from 'react';
@@ -11,7 +13,7 @@ const App = () => {
   const [result, setResult] = useState('');
   const [qrCodeDataURL, setQRCodeDataURL] = useState('');
   const [copied, setCopied] = useState(false);
-  const [uploadProgress, setUploadProgress] = useState(0); // State to track upload progress
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const generateQRCode = async () => {
     try {
@@ -34,7 +36,7 @@ const App = () => {
     navigator.clipboard.writeText(result)
       .then(() => {
         setCopied(true);
-        setTimeout(() => setCopied(false), 3000); // Reset copied state after 3 seconds
+        setTimeout(() => setCopied(false), 3000);
       })
       .catch((error) => console.error('Failed to copy:', error));
   };
@@ -47,7 +49,6 @@ const App = () => {
         data.append('file', file);
 
         const response = await uploadFile(data, (progressEvent) => {
-          // Update upload progress
           const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
           setUploadProgress(progress);
         });
@@ -76,15 +77,11 @@ const App = () => {
             style={{ display: 'none' }}
             onChange={(e) => setFile(e.target.files[0])}
           />
-          {uploadProgress > 0 && uploadProgress < 100 && ( // Show progress bar while uploading
-            <div className="progress">
+          {uploadProgress > 0 && uploadProgress < 100 && (
+            <div className="progress-container">
               <div
                 className="progress-bar"
-                role="progressbar"
                 style={{ width: `${uploadProgress}%` }}
-                aria-valuenow={uploadProgress}
-                aria-valuemin="0"
-                aria-valuemax="100"
               >
                 {`${uploadProgress}%`}
               </div>
@@ -98,8 +95,8 @@ const App = () => {
               <div>
                 <button onClick={onClickCopyLink} className="download">
                   {copied ? 'Copied' : 'Copy Link'}
-                  <div class="arrow-wrapper">
-                    <div class="arrow"></div>
+                  <div className="arrow-wrapper">
+                    <div className="arrow"></div>
                   </div>
                 </button>
                 <a href={result} target="_blank" rel="noopener noreferrer" ref={fileDownloadRef} style={{ display: 'none' }}></a>

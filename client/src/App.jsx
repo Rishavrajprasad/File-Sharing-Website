@@ -5,6 +5,9 @@ import QRCode from "qrcode";
 import React from "react";
 import "./App.scss";
 import { uploadFile } from "./services/api";
+import Lottie from "lottie-react";
+import animationData from "./assets/Loading Animation.json";
+import Background from "./Background";
 
 const App = () => {
   const fileInputRef = useRef();
@@ -75,6 +78,7 @@ const App = () => {
 
   return (
     <div className="container">
+      <Background />
       <div className="box">
         <div className="content">
           <h1>FILEFLOW</h1>
@@ -93,9 +97,9 @@ const App = () => {
           />
           {loading ? (
             <div className="loading-spinner">
-              {/* Your loading spinner animation */}
-              <div className="spinner"></div>
-              <p>Uploading...</p>
+              <div className="spinner">
+                <Lottie animationData={animationData} />
+              </div>
             </div>
           ) : (
             <>

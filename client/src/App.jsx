@@ -78,7 +78,9 @@ const App = () => {
 
   return (
     <div className="container">
-      <Background />
+      <div className="bg">
+        <Background />
+      </div>
       <div className="box">
         <div className="content">
           <h1>FILEFLOW</h1>

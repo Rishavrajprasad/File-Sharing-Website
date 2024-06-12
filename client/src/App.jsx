@@ -1,10 +1,10 @@
-// App.jsx
+// src/App.jsx
 
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import QRCode from "qrcode";
-import React from "react";
 import "./App.scss";
 import { uploadFile } from "./services/api";
+import { shortenURL } from "./services/shortenURL";
 import Lottie from "lottie-react";
 import animationData from "./assets/Loading Animation.json";
 import Background from "./Background";
@@ -12,16 +12,17 @@ import Background from "./Background";
 const App = () => {
   const fileInputRef = useRef();
   const fileDownloadRef = useRef();
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState(null);
   const [result, setResult] = useState("");
+  const [shortenedURL, setShortenedURL] = useState("");
   const [qrCodeDataURL, setQRCodeDataURL] = useState("");
   const [copied, setCopied] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const generateQRCode = async () => {
+  const generateQRCode = async (url) => {
     try {
-      const dataURL = await QRCode.toDataURL(result);
+      const dataURL = await QRCode.toDataURL(url);
       setQRCodeDataURL(dataURL);
     } catch (error) {
       console.error("Error generating QR code:", error);
@@ -38,7 +39,7 @@ const App = () => {
 
   const onClickCopyLink = () => {
     navigator.clipboard
-      .writeText(result)
+      .writeText(shortenedURL)
       .then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 3000);
@@ -61,7 +62,12 @@ const App = () => {
             );
             setUploadProgress(progress);
           });
-          setResult(response.path);
+          const longUrl = response.path;
+          setResult(longUrl);
+
+          const shortUrl = await shortenURL(longUrl);
+          setShortenedURL(shortUrl);
+          generateQRCode(shortUrl);
         } catch (error) {
           console.error("Error uploading file:", error);
         } finally {
@@ -71,10 +77,6 @@ const App = () => {
     };
     getFile();
   }, [file]);
-
-  useEffect(() => {
-    generateQRCode();
-  }, [result]);
 
   return (
     <div className="container">
@@ -86,8 +88,7 @@ const App = () => {
           <h1>FILEFLOW</h1>
           <p>Upload & Share</p>
           <button onClick={onClickUpload} className="upload">
-            {" "}
-            UPLOAD FILE{" "}
+            UPLOAD FILE
           </button>
           <input
             type="file"
@@ -105,16 +106,6 @@ const App = () => {
             </div>
           ) : (
             <>
-              {uploadProgress > 0 && uploadProgress < 100 && (
-                <div className="progress-container">
-                  <div
-                    className="progress-bar"
-                    style={{ width: `${uploadProgress}%` }}
-                  >
-                    {`${uploadProgress}%`}
-                  </div>
-                </div>
-              )}
               {qrCodeDataURL && (
                 <>
                   <div className="scanner">
@@ -128,12 +119,24 @@ const App = () => {
                       </div>
                     </button>
                     <a
-                      href={result}
+                      href={shortenedURL}
                       target="_blank"
                       rel="noopener noreferrer"
                       ref={fileDownloadRef}
                       style={{ display: "none" }}
                     ></a>
+                  </div>
+                  <div className="shortened-url">
+                    <p className="shortlink">
+                      File URL:{" "}
+                      <a
+                        href={shortenedURL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {shortenedURL}
+                      </a>
+                    </p>
                   </div>
                 </>
               )}
